@@ -1,0 +1,13 @@
+To install:
+	simply run the makefile! Type "make" into the command line.
+To run:
+	the program takes three command line arguments, in order;
+	filename, harmonicity, and modulation index. The filename must
+	end with ".wav". Harmonicity and modulation index are both
+	floating point values. For example,
+
+	./fm_test my_fm_wave.wav 1.2 1.5
+
+	would produce a wav file in the "res" folder entitled "my_fm_wave.wav".
+	The wave would be a 5 second tone with carrier frequency 440Hz,
+	harmonicity of 1.2 and modulation index of 1.5.

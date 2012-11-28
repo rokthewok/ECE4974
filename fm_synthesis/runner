@@ -1,0 +1,11 @@
+#! /bin/sh
+
+./fm_test harm_1-0_mod_1-0.wav 1.0 1.0
+./fm_test harm_1-1_mod_1-0.wav 1.1 1.0
+./fm_test harm_1-5_mod_1-0.wav 1.5 1.0
+./fm_test harm_1-0_mod_1-1.wav 1.0 1.1
+./fm_test harm_1-1_mod_1-1.wav 1.1 1.1
+./fm_test harm_1-5_mod_1-1.wav 1.5 1.1
+./fm_test harm_1-0_mod_1-5.wav 1.0 1.5
+./fm_test harm_1-1_mod_1-5.wav 1.1 1.5
+./fm_test harm_1-5_mod_1-5.wav 1.5 1.5

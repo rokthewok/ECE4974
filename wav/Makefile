@@ -1,6 +1,6 @@
 # This will be my makefile!
 
-VPATH = src::bin:include
+VPATH = src:bin:include
 
 CFLAGS = -Iinclude -lm
 bin = bin
