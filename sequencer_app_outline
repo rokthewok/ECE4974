@@ -1,0 +1,9 @@
+Sequencer
+	Contains 12 rows (1 octave)
+	Rows (Notes) contain amplitudes corresponding to points in time (certain beats, durations)
+	Each note has an Oscillator
+	Attack and decay?
+	
+Controllers change sequencer parameters
+Uses JACK audio to output sound
+	on each buffer get, the sequencer adds up notes and their amplitudes according to time intervals
