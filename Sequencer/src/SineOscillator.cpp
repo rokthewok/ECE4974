@@ -1,4 +1,4 @@
-#include "SineOscillator.h"
+#include "include/SineOscillator.h"
 
 SineOscillator::SineOscillator( float frequency )
 	: Oscillator::Oscillator( frequency ) {
@@ -10,8 +10,8 @@ SineOscillator::SineOscillator( int sampleRate, float frequency )
 
 }
 
-short SineOscillator::nextSample() {
-	short value = SHORT_MAX * sin( m_currentPhase );
+float SineOscillator::nextSample() {
+    float value = sin( m_currentPhase );
 	m_currentPhase += m_phaseIncrement;
 
 	if( m_currentPhase > 2.0 * M_PI ) {

@@ -6,7 +6,7 @@ class TriangleOscillator : public Oscillator {
 public:
 	explicit TriangleOscillator( float frequency = 440.0f );
 	TriangleOscillator( int sampleRate, float frequency );
-	virtual short nextSample();
+    virtual float nextSample();
 };
 
 #endif // TRIANGLEOSCILLATOR_H

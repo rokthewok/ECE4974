@@ -1,4 +1,4 @@
-#include "RisingSawtoothOscillator.h"
+#include "include/RisingSawtoothOscillator.h"
 
 RisingSawtoothOscillator::RisingSawtoothOscillator( float frequency )
 	: Oscillator::Oscillator( frequency ) {
@@ -10,8 +10,8 @@ RisingSawtoothOscillator::RisingSawtoothOscillator( int sampleRate, float freque
 
 }
 
-short RisingSawtoothOscillator::nextSample() {
-	short sample = SHORT_MAX * ( ( 1.0f / M_PI ) * m_currentPhase - 1.0f );
+float RisingSawtoothOscillator::nextSample() {
+    float sample = ( ( 1.0f / M_PI ) * m_currentPhase - 1.0f );
 
 	m_currentPhase += m_phaseIncrement;
 	if( m_currentPhase > 2.0f * M_PI ) {

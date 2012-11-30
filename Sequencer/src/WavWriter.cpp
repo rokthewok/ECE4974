@@ -1,6 +1,6 @@
 #include <iostream>
-#include "ByteConverter.h"
-#include "WavWriter.h"
+#include "include/ByteConverter.h"
+#include "include/WavWriter.h"
 
 WavWriter::WavWriter( std::string filename )
 	: m_filename( filename ),

@@ -1,0 +1,19 @@
+Discrete waveform basics
+	- sample rate
+	- sample depth
+
+Generating waveforms - sinusoid and geometric
+
+Generating waves in hardware
+	- DAC
+	- Arduino / uc programming
+	- Oscilloscope captures
+
+Additive synthesis
+	- Fourier Series
+
+Fm synthesis
+
+JACK Audio connection kit
+
+WAV file format

@@ -1,4 +1,4 @@
-#include "ByteConverter.h"
+#include "include/ByteConverter.h"
 
 void ByteConverter::shortToBytes( short value, char * buffer ) {
 /* Writes a short in byte array format, big endian */

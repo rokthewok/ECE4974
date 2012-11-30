@@ -7,7 +7,7 @@ class SineOscillator : public Oscillator {
 public:
 	explicit SineOscillator( float frequency = 440.0f );
 	SineOscillator( int sampleRate, float frequency );
-	virtual short nextSample();
+    virtual float nextSample();
 };
 
 #endif // SINEOSCILLATOR_H

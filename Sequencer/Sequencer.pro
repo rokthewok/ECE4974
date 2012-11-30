@@ -18,7 +18,8 @@ SOURCES += src/main.cpp\
     src/RisingSawtoothOscillator.cpp \
     src/Oscillator.cpp \
     src/FmOscillator.cpp \
-    src/ByteConverter.cpp
+    src/ByteConverter.cpp \
+    src/Note.cpp
 
 HEADERS  += include/MainWindow.h \
     include/WavWriter.h \
@@ -27,6 +28,7 @@ HEADERS  += include/MainWindow.h \
     include/RisingSawtoothOscillator.h \
     include/Oscillator.h \
     include/FmOscillator.h \
-    include/ByteConverter.h
+    include/ByteConverter.h \
+    include/Note.h
 
 FORMS    += mainwindow.ui

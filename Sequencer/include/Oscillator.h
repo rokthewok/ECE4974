@@ -1,7 +1,6 @@
 #ifndef OSCILLATOR_H
 #define OSCILLATOR_H
 
-#define SHORT_MAX 32767
 #define M_PI 3.1416
 
 class Oscillator {
@@ -10,7 +9,7 @@ public:
 	explicit Oscillator( float frequency );
 	Oscillator( int sampleRate, float frequency );
 	~Oscillator();
-	virtual short nextSample() = 0;
+    virtual float nextSample() = 0;
 	int getSampleRate() const;
 	void setSampleRate( int sampleRate );
 	float getFrequency() const;
