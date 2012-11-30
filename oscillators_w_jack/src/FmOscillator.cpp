@@ -10,9 +10,9 @@ FmOscillator::FmOscillator( int sampleRate, float frequency,
 
 }
 
-short FmOscillator::nextSample() {
-	short sample;
-	sample = SHORT_MAX * sin( m_currentPhase + ( m_modulationIndex * sin( m_harmonicity * m_currentPhase ) ) );
+float FmOscillator::nextSample() {
+	float sample;
+	sample = sin( m_currentPhase + ( m_modulationIndex * sin( m_harmonicity * m_currentPhase ) ) );
 	
 	// TODO account for floating point overflow somehow
 	// n/m = harmonicity, n = number of 2*PI in currenModulatingPhase, m = number of 2*PI in currentPhase

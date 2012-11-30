@@ -5,12 +5,11 @@
 #include <string>
 #include <unistd.h>
 #include <string.h>
-#include "WavWriter.h"
-#include "FmOscillator.h"
-#include "ByteConverter.h"
+#include <stdio.h>
+#include "SineOscillator.h"
 
 typedef jack_default_audio_sample_t sample_t;
-Oscillator * osc;
+SineOscillator osc;
 jack_port_t * outputPort;
 
 int process( jack_nframes_t nframes, void * args ) {
@@ -18,19 +17,13 @@ int process( jack_nframes_t nframes, void * args ) {
 	
 	jack_nframes_t i;
 	for( i = 0; i < nframes; i++ ) {
-		buffer[i] = osc->nextSample();
+		buffer[i] = osc.nextSample();
 	}
 	
 	return 0;
 }
 
 int main( int argc, char ** argv ) {
-	
-	if( argc < 3 ) {
-		std::cout << "please provide harmonicity and modulation index to command line!" << std::endl;
-		return 0;
-	}
-
 	char * clientName = (char *) malloc( 9 * sizeof( char ) );
 	strcpy( clientName, "fm" );
 
@@ -45,10 +38,9 @@ int main( int argc, char ** argv ) {
 
 	int sampleRate = jack_get_sample_rate( client );
 	float frequency = 440.0f;
-	float harmonicity = atof( argv[1] );
-	float modulationIndex = atof( argv[2] );
 
-	Oscillator * osc = new FmOscillator( sampleRate, frequency, harmonicity, modulationIndex );
+	osc.setSampleRate( sampleRate );
+	osc.setFrequency( frequency );
 
 	if ( jack_activate( client ) ) {
 		fprintf (stderr, "cannot activate client");
@@ -66,10 +58,11 @@ int main( int argc, char ** argv ) {
 		if( !jack_connect( client, jack_port_name( outputPort ), ports[i] ) ) break;
 	}
 	
-	sleep( 5000 );
+	while(1) {
+		sleep( 1 );
+	}
 
 	free( ports );
-	delete osc;
 
 	return 0;
 }

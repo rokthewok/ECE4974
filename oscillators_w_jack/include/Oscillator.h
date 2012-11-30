@@ -10,7 +10,7 @@ public:
 	explicit Oscillator( float frequency );
 	Oscillator( int sampleRate, float frequency );
 	~Oscillator();
-	virtual short nextSample() = 0;
+	virtual float nextSample() = 0;
 	int getSampleRate() const;
 	void setSampleRate( int sampleRate );
 	float getFrequency() const;
