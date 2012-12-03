@@ -19,7 +19,8 @@ SOURCES += src/main.cpp\
     src/Oscillator.cpp \
     src/FmOscillator.cpp \
     src/ByteConverter.cpp \
-    src/Note.cpp
+    src/Note.cpp \
+    src/Sequencer.cpp
 
 HEADERS  += include/MainWindow.h \
     include/WavWriter.h \
@@ -29,6 +30,7 @@ HEADERS  += include/MainWindow.h \
     include/Oscillator.h \
     include/FmOscillator.h \
     include/ByteConverter.h \
-    include/Note.h
+    include/Note.h \
+    include/Sequencer.h
 
 FORMS    += mainwindow.ui
