@@ -18,7 +18,6 @@ public:
     QList<Note *> getNotes();
     void setSampleRate();
     void setBpm();
-    void pause();
     void stop();
 private:
     int m_bpm;
