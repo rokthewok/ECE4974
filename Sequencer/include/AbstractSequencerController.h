@@ -1,7 +1,10 @@
 #ifndef ABSTRACTSEQUENCERCONTROLLER_H
 #define ABSTRACTSEQUENCERCONTROLLER_H
 
-class AbstractSequencerController {
+#include <QObject>
+
+class AbstractSequencerController : public QObject {
+    Q_OBJECT
 public:
     virtual void init() = 0;
     virtual void play() = 0;
