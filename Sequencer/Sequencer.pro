@@ -6,9 +6,9 @@
 
 QT       += core gui
 
+LIBS += -ljack
 TARGET = Sequencer
 TEMPLATE = app
-
 
 SOURCES += src/main.cpp\
         src/MainWindow.cpp \
@@ -33,7 +33,7 @@ HEADERS  += include/MainWindow.h \
     include/ByteConverter.h \
     include/Note.h \
     include/Sequencer.h \
-    include/AbstractSequencerController.h \
-    include/JackSequencerController.h
+    include/JackSequencerController.h \
+    include/Pitch.h
 
 FORMS    += mainwindow.ui

@@ -10,12 +10,13 @@ class Sequencer {
 public:
     explicit Sequencer( int sampleRate );
     Sequencer( int sampleRate, int bpm );
+    void init();
     float nextSample();
     int getCurrentRepeat() const;
     int getSampleRate() const;
     int getCurrentBeat() const;
     int getBpm() const;
-    QList<Note *> getNotes();
+    QList<Note *> & getNotes();
     void setSampleRate();
     void setBpm();
     void stop();
