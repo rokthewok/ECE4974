@@ -4,12 +4,9 @@
 #define jack_default_audio_sample_t sample_t
 
 #include <jack/jack.h>
-#include <QObject>
-#include <QString>
 #include "include/Sequencer.h"
 
-class JackSequencerController : public QObject {
-    Q_OBJECT
+class JackSequencerController {
 public:
     JackSequencerController();
     void init();
@@ -21,14 +18,8 @@ public:
     jack_port_t * getPort();
     sample_t nextSample();
     void setSequencer( Sequencer * sequencer );
-
-signals:
-    void jackInitError( QString message );
-
-public slots:
     void addNoteOnBeat( int note, int beat );
     void removeNoteOnBeat( int note, int beat );
-
 private:
     jack_client_t * m_client;
     jack_port_t * m_port;

@@ -6,15 +6,22 @@
 Sequencer::Sequencer( int sampleRate )
     : m_bpm( 100 ),
       m_beat( 0 ),
-      m_sampleRate( sampleRate ) {
-    m_samplesPerBeat = 1; // TODO something else here
+      m_barLength( 16 ),
+      m_currentSample( 0 ),
+      m_decay( 1.0f ),
+      m_sampleRate( sampleRate ),
+      m_currentRepeat( 0 ) {
+    m_samplesPerBeat = calculateSamplesPerBeat( m_sampleRate, m_bpm );
 }
 
 Sequencer::Sequencer( int sampleRate, int bpm )
     : m_bpm( bpm ),
       m_beat( 0 ),
-      m_sampleRate( sampleRate ) {
-    m_samplesPerBeat = 1; // TODO something else here
+      m_barLength( 16 ),
+      m_decay( 1.0f ),
+      m_sampleRate( sampleRate ),
+      m_currentRepeat( 0 ) {
+    m_samplesPerBeat = calculateSamplesPerBeat( m_sampleRate, m_bpm );
 }
 
 void Sequencer::init() {
@@ -30,40 +37,61 @@ float Sequencer::nextSample() {
 
     QList<Note *>::iterator it;
     for( it = m_notes.begin(); it != m_notes.end(); it++ ) {
-        sample += (*it)->nextSample( m_beat ) / 12.0;
+        sample += m_decay * (*it)->nextSample( m_beat ) / 12.0;
     }
 
-    return 0.0f;
+    if( m_currentSample % m_samplesPerBeat == 0 ) {
+        m_currentSample = 0;
+        m_beat++;
+        m_decay = 1.0f;
+        if( m_beat >= m_barLength ) {
+            m_beat = 0;
+        }
+    } else if( m_samplesPerBeat - m_currentSample < 2000 ) {
+        m_decay -= 0.0005; // to go from 1 to 0 in 2000 samples
+    }
+
+    m_currentSample++;
+
+    return sample;
 }
 
 int Sequencer::getCurrentRepeat() const {
-    return 0;
+    return m_currentRepeat;
 }
 
 int Sequencer::getSampleRate() const {
-    return 0;
+    return m_sampleRate;
 }
 
 int Sequencer::getCurrentBeat() const {
-    return 0;
+    return m_beat;
 }
 
 int Sequencer::getBpm() const {
-    return 0;
+    return m_bpm;
 }
 
 QList<Note *> & Sequencer::getNotes() {
     return m_notes;
 }
 
-void Sequencer::setSampleRate() {
-
+void Sequencer::setSampleRate( int sampleRate ) {
+    m_sampleRate = sampleRate;
+    m_samplesPerBeat = calculateSamplesPerBeat( m_sampleRate, m_bpm );
 }
 
-void Sequencer::setBpm() {
-
+void Sequencer::setBpm( int bpm ) {
+    m_bpm = bpm;
+    m_samplesPerBeat = calculateSamplesPerBeat( m_sampleRate, m_bpm );
 }
 
 void Sequencer::stop() {
+    m_currentSample = 0;
+    m_beat = 0;
+    m_decay = 0.0f;
+}
 
+int Sequencer::calculateSamplesPerBeat( int sampleRate, int bpm ) {
+    return (int) ( (float) sampleRate * 60.0f / (float) bpm );
 }
