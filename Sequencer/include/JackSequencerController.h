@@ -24,6 +24,7 @@ public:
 
 signals:
     void jackInitError( QString message );
+    void jackPlayError( QString message );
 
 public slots:
     void addNoteOnBeat( int note, int beat );
@@ -31,7 +32,8 @@ public slots:
 
 private:
     jack_client_t * m_client;
-    jack_port_t * m_port;
+    jack_port_t * m_outgoingPort;
+    jack_port_t * m_destinationPort;
     Sequencer * m_sequencer;
 };
 

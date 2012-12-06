@@ -2,14 +2,16 @@
 
 Note::Note( Oscillator *oscillator )
     : m_oscillator( oscillator ),
-      m_barLength( 4 ) {
+      m_barLength( 4 ),
+      m_amplitude( 1.0f ) {
     m_beats = new int[m_barLength]; // four "beat" length;
 }
 
 Note::Note( Oscillator *oscillator, int barLength )
     : m_oscillator( oscillator ),
       m_barLength( barLength ),
-      m_beats( new int[barLength] ) {
+      m_beats( new int[barLength] ),
+      m_amplitude( 1.0f ) {
 
 }
 
@@ -18,7 +20,7 @@ float Note::nextSample( int beat ) {
         return 0.0f;
     }
 
-    return m_beats[beat] * m_oscillator->nextSample();
+    return m_amplitude * m_beats[beat] * m_oscillator->nextSample();
 }
 
 Oscillator * Note::setOscillator( Oscillator * oscillator ) {

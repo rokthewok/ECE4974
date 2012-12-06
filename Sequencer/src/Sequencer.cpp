@@ -4,21 +4,15 @@
 #include "include/Pitch.h"
 
 Sequencer::Sequencer( int sampleRate )
-    : m_bpm( 100 ),
-      m_beat( 0 ),
-      m_barLength( 16 ),
-      m_currentSample( 0 ),
-      m_decay( 1.0f ),
-      m_sampleRate( sampleRate ),
-      m_currentRepeat( 0 ) {
-    m_samplesPerBeat = calculateSamplesPerBeat( m_sampleRate, m_bpm );
+    : Sequencer::Sequencer( sampleRate, 400 ) {
+
 }
 
 Sequencer::Sequencer( int sampleRate, int bpm )
     : m_bpm( bpm ),
       m_beat( 0 ),
       m_barLength( 16 ),
-      m_decay( 1.0f ),
+      m_decay( 0.1f ),
       m_sampleRate( sampleRate ),
       m_currentRepeat( 0 ) {
     m_samplesPerBeat = calculateSamplesPerBeat( m_sampleRate, m_bpm );
@@ -37,18 +31,22 @@ float Sequencer::nextSample() {
 
     QList<Note *>::iterator it;
     for( it = m_notes.begin(); it != m_notes.end(); it++ ) {
-        sample += m_decay * (*it)->nextSample( m_beat ) / 12.0;
+        sample += m_decay * (*it)->nextSample( m_beat ); // TODO keep track of number of notes on a beat, and scale
+                                                         // the sample appropriately
     }
 
     if( m_currentSample % m_samplesPerBeat == 0 ) {
         m_currentSample = 0;
         m_beat++;
-        m_decay = 1.0f;
         if( m_beat >= m_barLength ) {
             m_beat = 0;
         }
-    } else if( m_samplesPerBeat - m_currentSample < 2000 ) {
-        m_decay -= 0.0005; // to go from 1 to 0 in 2000 samples
+    } else if( m_currentSample < m_samplesPerBeat / 20
+               && m_decay < 1.0f ) {
+        m_decay += 0.9f * 20.0f / (float) m_samplesPerBeat; // interpolate attack by an appropriate estimate
+    } else if( m_samplesPerBeat - m_currentSample < m_samplesPerBeat / 10
+               && m_decay > 0.1f ) {
+        m_decay -= 0.9f * 10.0f / *(float) m_samplesPerBeat; // interpolate decay by an appropriate estimate
     }
 
     m_currentSample++;
