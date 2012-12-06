@@ -73,7 +73,7 @@
 #define F_BFLAT3    F_ASHARP3
 #define F_B3        2 * F_B2
 
-#define F_C4        2 * F_C3f
+#define F_C4        2 * F_C3
 #define F_CSHARP4   2 * F_CSHARP3
 #define F_DFLAT4    F_CSHARP4
 #define F_D4        2 * F_D3

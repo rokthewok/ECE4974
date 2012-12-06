@@ -11,7 +11,7 @@ void JackSequencerController::init() {
         return;
     }
 
-    if( !( jack_set_process_callback( m_client, JackSequencerController::doProcess, m_sequencer ) ) ) {
+    if( !( jack_set_process_callback( m_client, &JackSequencerController::doProcess, this ) ) ) {
         this->jackInitError( QString( "could not set the process callback." ) );
     }
 
@@ -45,12 +45,12 @@ void JackSequencerController::play() {
 }
 
 void JackSequencerController::pause() {
-    jack_disconnect( m_client, m_outgoingPort, m_destinationPort );
+    jack_disconnect( m_client, jack_port_name( m_outgoingPort ), m_destinationPort );
     jack_deactivate( m_client );
 }
 
 void JackSequencerController::stop() {
-    jack_disconnect( m_client, m_outgoingPort, m_destinationPort );
+    jack_disconnect( m_client, jack_port_name( m_outgoingPort ), m_destinationPort );
     jack_deactivate( m_client );
     m_sequencer->stop();
 }

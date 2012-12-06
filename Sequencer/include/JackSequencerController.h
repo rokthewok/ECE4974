@@ -1,7 +1,7 @@
 #ifndef JACKSEQUENCERCONTROLLER_H
 #define JACKSEQUENCERCONTROLLER_H
 
-#define jack_default_audio_sample_t sample_t
+#define sample_t jack_default_audio_sample_t
 
 #include <jack/jack.h>
 #include <QObject>
@@ -13,9 +13,6 @@ class JackSequencerController : public QObject {
 public:
     JackSequencerController();
     void init();
-    void play();
-    void pause();
-    void stop();
     static int doProcess( jack_nframes_t nframes, void * args );
     jack_client_t * getClient();
     jack_port_t * getPort();
@@ -29,11 +26,14 @@ signals:
 public slots:
     void addNoteOnBeat( int note, int beat );
     void removeNoteOnBeat( int note, int beat );
+    void play();
+    void pause();
+    void stop();
 
 private:
     jack_client_t * m_client;
     jack_port_t * m_outgoingPort;
-    jack_port_t * m_destinationPort;
+    const char * m_destinationPort;
     Sequencer * m_sequencer;
 };
 

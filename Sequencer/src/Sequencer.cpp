@@ -19,11 +19,11 @@ Sequencer::Sequencer( int sampleRate, int bpm )
 }
 
 void Sequencer::init() {
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_C3 ) ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_D3 ) ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_E3 ) ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_G3 ) ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_A3 ) ) );
+    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_C4 ), 16 ) );
+    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_D4 ), 16 ) );
+    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_E4 ), 16 ) );
+    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_G4 ), 16 ) );
+    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_A4 ), 16 ) );
 }
 
 float Sequencer::nextSample() {
@@ -43,10 +43,10 @@ float Sequencer::nextSample() {
         }
     } else if( m_currentSample < m_samplesPerBeat / 20
                && m_decay < 1.0f ) {
-        m_decay += 0.9f * 20.0f / (float) m_samplesPerBeat; // interpolate attack by an appropriate estimate
+        m_decay += 20.0f / (float) m_samplesPerBeat; // interpolate attack by an appropriate estimate
     } else if( m_samplesPerBeat - m_currentSample < m_samplesPerBeat / 10
-               && m_decay > 0.1f ) {
-        m_decay -= 0.9f * 10.0f / *(float) m_samplesPerBeat; // interpolate decay by an appropriate estimate
+               && m_decay > 0.0f ) {
+        m_decay -= 10.0f / (float) m_samplesPerBeat; // interpolate decay by an appropriate estimate
     }
 
     m_currentSample++;
