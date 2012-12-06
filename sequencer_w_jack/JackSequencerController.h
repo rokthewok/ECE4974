@@ -1,10 +1,10 @@
 #ifndef JACKSEQUENCERCONTROLLER_H
 #define JACKSEQUENCERCONTROLLER_H
 
-#define jack_default_audio_sample_t sample_t
+#define sample_t jack_default_audio_sample_t
 
 #include <jack/jack.h>
-#include "include/Sequencer.h"
+#include "Sequencer.h"
 
 class JackSequencerController {
 public:
@@ -18,8 +18,8 @@ public:
     jack_port_t * getPort();
     sample_t nextSample();
     void setSequencer( Sequencer * sequencer );
-    void addNoteOnBeat( int note, int beat );
-    void removeNoteOnBeat( int note, int beat );
+    void setNoteOnBeat( int note, int beat );
+    void clearNoteOnBeat( int note, int beat );
 private:
     jack_client_t * m_client;
     jack_port_t * m_port;

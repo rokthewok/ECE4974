@@ -1,7 +1,7 @@
 #ifndef SEQUENCER_H
 #define SEQUENCER_H
 
-#include <QList>
+#include <vector>
 #include "Note.h"
 
 #define NUM_NOTES   5
@@ -16,7 +16,7 @@ public:
     int getSampleRate() const;
     int getCurrentBeat() const;
     int getBpm() const;
-    QList<Note *> & getNotes();
+    std::vector<Note *> & getNotes();
     void setSampleRate( int sampleRate );
     void setBpm(int bpm);
     void stop();
@@ -29,7 +29,7 @@ private:
     int m_sampleRate;
     int m_samplesPerBeat;
     int m_currentRepeat;
-    QList<Note *> m_notes;
+    std::vector<Note *> m_notes;
 
     int calculateSamplesPerBeat( int sampleRate, int bpm );
 };

@@ -35,7 +35,7 @@ int main( int argc, char ** argv ) {
 		return 1;
 	}
 
-	Oscillator * osc = new FmOscillator( 48000, 440.0f, 1.2, 2.0 );	
+	Oscillator * osc = new SineOscillator( 48000, 440.0f );	
 
 	jack_set_process_callback( client, process, osc );
 	outputPort = jack_port_register( client, "Hz", JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0 );
