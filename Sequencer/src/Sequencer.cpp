@@ -2,6 +2,7 @@
 #include "include/Note.h"
 #include "include/SineOscillator.h"
 #include "include/Pitch.h"
+#include "include/Wavetype.h"
 
 Sequencer::Sequencer( int sampleRate )
     : Sequencer::Sequencer( sampleRate, 400 ) {
@@ -19,12 +20,12 @@ Sequencer::Sequencer( int sampleRate, int bpm )
 }
 
 void Sequencer::init() {
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_C4 ), 16 ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_D4 ), 16 ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_E4 ), 16 ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_G4 ), 16 ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_A4 ), 16 ) );
-    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_C5 ), 16 ) );
+    m_notes.append( new Note( SINE, new SineOscillator( m_sampleRate, F_C4 ), 16 ) );
+    m_notes.append( new Note( SINE, new SineOscillator( m_sampleRate, F_D4 ), 16 ) );
+    m_notes.append( new Note( SINE, new SineOscillator( m_sampleRate, F_E4 ), 16 ) );
+    m_notes.append( new Note( SINE, new SineOscillator( m_sampleRate, F_G4 ), 16 ) );
+    m_notes.append( new Note( SINE, new SineOscillator( m_sampleRate, F_A4 ), 16 ) );
+    m_notes.append( new Note( SINE, new SineOscillator( m_sampleRate, F_C5 ), 16 ) );
 
     for( int i = 0; i < m_barLength; i++ ) {
         m_numberOfNotesPerBeat.append( 0 );

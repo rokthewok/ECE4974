@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     MainWindow w( &controller );
+    w.setWindowTitle( QString( "Super Savvy Sequencer" ) );
     w.show();
     
     return a.exec();

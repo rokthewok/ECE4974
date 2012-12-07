@@ -20,7 +20,7 @@
       <property name="currentIndex">
        <number>1</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="sequencerTab">
        <attribute name="title">
         <string>Tab 1</string>
        </attribute>
@@ -30,7 +30,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="noteEditorTab">
        <attribute name="title">
         <string>Tab 2</string>
        </attribute>
@@ -153,8 +153,19 @@
            <string>Wave Parameters</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="2">
+            <widget class="QLabel" name="waveformLabel">
+             <property name="text">
+              <string>Waveform</string>
+             </property>
+            </widget>
+           </item>
            <item row="3" column="2">
-            <widget class="QDoubleSpinBox" name="frequencySpinner"/>
+            <widget class="QDoubleSpinBox" name="frequencySpinner">
+             <property name="maximum">
+              <double>100000.000000000000000</double>
+             </property>
+            </widget>
            </item>
            <item row="1" column="1">
             <spacer name="horizontalSpacer">
@@ -180,13 +191,30 @@
             </widget>
            </item>
            <item row="6" column="2">
-            <widget class="QDoubleSpinBox" name="harmonicitySpinner"/>
+            <widget class="QDoubleSpinBox" name="harmonicitySpinner">
+             <property name="minimum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+            </widget>
            </item>
            <item row="8" column="2">
-            <widget class="QDoubleSpinBox" name="modIndexSpinner"/>
+            <widget class="QDoubleSpinBox" name="modIndexSpinner">
+             <property name="minimum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0" rowspan="8">
             <widget class="QSlider" name="amplitudeSlider">
+             <property name="maximum">
+              <number>100</number>
+             </property>
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -202,24 +230,17 @@
            <item row="1" column="2">
             <widget class="QComboBox" name="waveformChooser"/>
            </item>
-           <item row="7" column="2">
-            <widget class="QLabel" name="modIndexLabel">
-             <property name="text">
-              <string>Modulation Index</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="waveformLabel">
-             <property name="text">
-              <string>Waveform</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="amplitudeLabel">
              <property name="text">
               <string>Amp</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QLabel" name="modIndexLabel">
+             <property name="text">
+              <string>Modulation Index</string>
              </property>
             </widget>
            </item>

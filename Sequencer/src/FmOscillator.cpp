@@ -19,3 +19,19 @@ float FmOscillator::nextSample() {
 
 	return sample;
 }
+
+float FmOscillator::getHarmonicity() const {
+    return m_harmonicity;
+}
+
+float FmOscillator::getModulationIndex() const {
+    return m_modulationIndex;
+}
+
+void FmOscillator::setHarmonicity( float harmonicity ) {
+    m_harmonicity = harmonicity;
+}
+
+void FmOscillator::setModulationIndex( float modulationIndex ) {
+    m_modulationIndex = modulationIndex;
+}

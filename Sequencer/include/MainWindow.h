@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QList>
 #include <QCheckBox>
+#include "Wavetype.h"
 
 class JackSequencerController;
 
@@ -27,7 +28,22 @@ public slots:
     void setNoteFiveBeats();
     void setNoteSixBeats();
 
+    void buttonOnePressed();
+    void buttonTwoPressed();
+    void buttonThreePressed();
+    void buttonFourPressed();
+    void buttonFivePressed();
+    void buttonSixPressed();
+
+    void amplitudeSliderChanged( int value );
+    void frequencySpinnerChanged( double value );
+    void harmonicitySpinnerChanged( double value );
+    void waveformChooserChanged( QString wave );
+    void modulationIndexSpinnerChanged( double value );
+
 private:
+    void setComboBox( Wavetype wavetype );
+
     Ui::MainWindow *ui;
     JackSequencerController * m_sequencerController;
     QList<QCheckBox *> m_noteOneButtons;
@@ -36,6 +52,12 @@ private:
     QList<QCheckBox *> m_noteFourButtons;
     QList<QCheckBox *> m_noteFiveButtons;
     QList<QCheckBox *> m_noteSixButtons;
+    int m_currentNote;
+
+    const QString m_sine = "Sine";
+    const QString m_fm = "FM";
+    const QString m_rsaw = "Rising Sawtooth";
+    const QString m_triangle = "Triangle";
 };
 
 #endif // MAINWINDOW_H

@@ -12,6 +12,7 @@ class JackSequencerController : public QObject {
     Q_OBJECT
 public:
     JackSequencerController();
+    ~JackSequencerController();
     void init();
     static int doProcess( jack_nframes_t nframes, void * args );
     jack_client_t * getClient();
@@ -30,6 +31,11 @@ public slots:
     void play();
     void pause();
     void stop();
+    void setAmplitude( int note, float value );
+    void setOscillator( int note, Wavetype wavetype );
+    void setHarmonicity( int note, float value );
+    void setModulationIndex( int note, float value );
+    void setFrequency( int note, float frequency );
 
 private:
     jack_client_t * m_client;

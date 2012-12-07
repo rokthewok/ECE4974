@@ -47,3 +47,7 @@ void Oscillator::setFrequency( float frequency ) {
 	m_currentPhase = 0.0f;
 	m_phaseIncrement = (float) ( ( 2.0 * M_PI ) / ( (float) m_sampleRate / m_frequency ) );
 }
+
+void Oscillator::reset() {
+    m_currentPhase = 0.0f;
+}

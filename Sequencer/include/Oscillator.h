@@ -14,6 +14,7 @@ public:
 	void setSampleRate( int sampleRate );
 	float getFrequency() const;
 	void setFrequency( float frequency );
+    void reset();
 protected:
 	float m_currentPhase;
 	float m_phaseIncrement;

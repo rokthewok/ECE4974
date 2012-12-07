@@ -21,7 +21,8 @@ SOURCES += src/main.cpp\
     src/ByteConverter.cpp \
     src/Note.cpp \
     src/Sequencer.cpp \
-    src/JackSequencerController.cpp
+    src/JackSequencerController.cpp \
+    src/OscillatorFactory.cpp
 
 HEADERS  += include/MainWindow.h \
     include/WavWriter.h \
@@ -34,6 +35,8 @@ HEADERS  += include/MainWindow.h \
     include/Note.h \
     include/Sequencer.h \
     include/JackSequencerController.h \
-    include/Pitch.h
+    include/Pitch.h \
+    include/Wavetype.h \
+    include/OscillatorFactory.h
 
 FORMS    += mainwindow.ui

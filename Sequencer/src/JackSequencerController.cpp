@@ -1,8 +1,16 @@
 #include "include/JackSequencerController.h"
+#include "include/Wavetype.h"
+#include "include/FmOscillator.h"
 
 JackSequencerController::JackSequencerController()
     : m_sequencer( NULL ) {
 
+}
+
+JackSequencerController::~JackSequencerController() {
+    jack_disconnect( m_client, jack_port_name( m_outgoingPort ), m_destinationPort );
+    jack_deactivate( m_client );
+    jack_client_close( m_client );
 }
 
 void JackSequencerController::init() {
@@ -93,4 +101,30 @@ Sequencer * JackSequencerController::getSequencer() {
 
 void JackSequencerController::setSequencer( Sequencer * sequencer ) {
     m_sequencer = sequencer;
+}
+
+void JackSequencerController::setAmplitude(int note, float value) {
+    m_sequencer->getNotes().at( note )->setAmplitude( value );
+}
+
+void JackSequencerController::setOscillator(int note, Wavetype wavetype) {
+
+}
+
+void JackSequencerController::setFrequency(int note, float frequency) {
+    m_sequencer->getNotes().at( note )->getOscillator()->setFrequency( frequency );
+}
+
+void JackSequencerController::setHarmonicity(int note, float value) {
+    if( m_sequencer->getNotes().at( note )->getWavetype() == FM ) {
+        FmOscillator * fm = static_cast<FmOscillator *>( m_sequencer->getNotes().at( note )->getOscillator() );
+        fm->setHarmonicity( value );
+    }
+}
+
+void JackSequencerController::setModulationIndex(int note, float value) {
+    if( m_sequencer->getNotes().at( note )->getWavetype() == FM ) {
+        FmOscillator * fm = static_cast<FmOscillator *>( m_sequencer->getNotes().at( note )->getOscillator() );
+        fm->setModulationIndex( value );
+    }
 }

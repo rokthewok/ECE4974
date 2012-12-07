@@ -1,6 +1,10 @@
+#include <QComboBox>
 #include "include/MainWindow.h"
 #include "ui_mainwindow.h"
 #include "include/JackSequencerController.h"
+#include "include/Oscillator.h"
+#include "include/Note.h"
+#include "include/FmOscillator.h"
 
 MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *parent) :
     QMainWindow(parent),
@@ -11,6 +15,28 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
     connect( ui->playButton, SIGNAL(clicked()), m_sequencerController, SLOT( play() ) );
     connect( ui->stopButton, SIGNAL( clicked() ), m_sequencerController, SLOT( stop() ) );
     setFixedSize( 600, 400 );
+
+    ui->tabWidget->setTabText( 0, QString( "Sequencer" ) );
+    ui->tabWidget->setTabText( 1, QString( "Note Editor" ) );
+
+    QComboBox * comboBox = ui->waveformChooser;
+    comboBox->addItem( m_sine );
+    comboBox->addItem( m_triangle );
+    comboBox->addItem( m_rsaw );
+    comboBox->addItem( m_fm );
+
+    connect( ui->noteOneButton, SIGNAL( clicked() ), this, SLOT( buttonOnePressed() ) );
+    connect( ui->noteTwoButton, SIGNAL( clicked() ), this, SLOT( buttonTwoPressed() ) );
+    connect( ui->noteThreeButton, SIGNAL( clicked() ), this, SLOT( buttonThreePressed() ) );
+    connect( ui->noteFourButton, SIGNAL( clicked() ), this, SLOT( buttonFourPressed() ) );
+    connect( ui->noteFiveButton, SIGNAL( clicked() ), this, SLOT( buttonFivePressed() ) );
+    connect( ui->noteSixButton, SIGNAL( clicked() ), this, SLOT( buttonSixPressed() ) );
+
+    connect( ui->amplitudeSlider, SIGNAL( sliderMoved(int) ), this, SLOT( amplitudeSliderChanged(int) ) );
+    connect( ui->frequencySpinner, SIGNAL( valueChanged(double) ), this, SLOT( frequencySpinnerChanged(double) ) );
+    connect( ui->modIndexSpinner, SIGNAL( valueChanged(double) ), this, SLOT( modulationIndexSpinnerChanged(double) ) );
+    connect( ui->harmonicitySpinner, SIGNAL( valueChanged(double) ), this, SLOT( harmonicitySpinnerChanged(double) ) );
+    connect( ui->waveformChooser, SIGNAL( currentIndexChanged(QString) ), this, SLOT( waveformChooserChanged(QString) ) );
 
     for( int i = 0; i < m_sequencerController->getSequencer()->getBarLength(); i++ ) {
         // add a radio button to each list
@@ -102,4 +128,200 @@ void MainWindow::setNoteSixBeats() {
             m_sequencerController->removeNoteOnBeat( 5, i );
         }
     }
+}
+
+void MainWindow::buttonOnePressed() {
+    m_currentNote = 0;
+    Note * note = m_sequencerController->getSequencer()->getNotes().at( 0 );
+    Oscillator * oscillator = note->getOscillator();
+
+    float frequency = oscillator->getFrequency();
+    float amplitude = note->getAmplitude();
+
+    blockSignals( true );
+    if( note->getWavetype() == FM ) {
+        FmOscillator * fm = static_cast<FmOscillator *>( oscillator );
+        ui->harmonicitySpinner->setEnabled( true );
+        ui->modIndexSpinner->setEnabled( true );
+        ui->harmonicitySpinner->setValue( fm->getHarmonicity() );
+        ui->modIndexSpinner->setValue( fm->getModulationIndex() );
+    } else {
+        ui->harmonicitySpinner->setEnabled( false );
+        ui->modIndexSpinner->setEnabled( false );
+    }
+
+    ui->frequencySpinner->setValue( frequency );
+    ui->amplitudeSlider->setValue( amplitude * 100.0f );
+
+    setComboBox( note->getWavetype() );
+    blockSignals( false );
+}
+
+void MainWindow::buttonTwoPressed() {
+    m_currentNote = 1;
+    Note * note = m_sequencerController->getSequencer()->getNotes().at( 1 );
+    Oscillator * oscillator = note->getOscillator();
+
+    float frequency = oscillator->getFrequency();
+    float amplitude = note->getAmplitude();
+
+    blockSignals( true );
+    if( note->getWavetype() == FM ) {
+        FmOscillator * fm = static_cast<FmOscillator *>( oscillator );
+        ui->harmonicitySpinner->setEnabled( true );
+        ui->modIndexSpinner->setEnabled( true );
+        ui->harmonicitySpinner->setValue( fm->getHarmonicity() );
+        ui->modIndexSpinner->setValue( fm->getModulationIndex() );
+    } else {
+        ui->harmonicitySpinner->setEnabled( false );
+        ui->modIndexSpinner->setEnabled( false );
+    }
+
+    ui->frequencySpinner->setValue( frequency );
+    ui->amplitudeSlider->setValue( amplitude * 100.0f );
+
+    setComboBox( note->getWavetype() );
+    blockSignals( false );
+}
+
+void MainWindow::buttonThreePressed() {
+    m_currentNote = 2;
+    Note * note = m_sequencerController->getSequencer()->getNotes().at( 2 );
+    Oscillator * oscillator = note->getOscillator();
+
+    float frequency = oscillator->getFrequency();
+    float amplitude = note->getAmplitude();
+
+    blockSignals( true );
+    if( note->getWavetype() == FM ) {
+        FmOscillator * fm = static_cast<FmOscillator *>( oscillator );
+        ui->harmonicitySpinner->setEnabled( true );
+        ui->modIndexSpinner->setEnabled( true );
+        ui->harmonicitySpinner->setValue( fm->getHarmonicity() );
+        ui->modIndexSpinner->setValue( fm->getModulationIndex() );
+    } else {
+        ui->harmonicitySpinner->setEnabled( false );
+        ui->modIndexSpinner->setEnabled( false );
+    }
+
+    ui->frequencySpinner->setValue( frequency );
+    ui->amplitudeSlider->setValue( amplitude * 100.0f );
+
+    setComboBox( note->getWavetype() );
+    blockSignals( false );
+}
+
+void MainWindow::buttonFourPressed() {
+    m_currentNote = 3;
+    Note * note = m_sequencerController->getSequencer()->getNotes().at( 3 );
+    Oscillator * oscillator = note->getOscillator();
+
+    float frequency = oscillator->getFrequency();
+    float amplitude = note->getAmplitude();
+
+    blockSignals( true );
+    if( note->getWavetype() == FM ) {
+        FmOscillator * fm = static_cast<FmOscillator *>( oscillator );
+        ui->harmonicitySpinner->setEnabled( true );
+        ui->modIndexSpinner->setEnabled( true );
+        ui->harmonicitySpinner->setValue( fm->getHarmonicity() );
+        ui->modIndexSpinner->setValue( fm->getModulationIndex() );
+    } else {
+        ui->harmonicitySpinner->setEnabled( false );
+        ui->modIndexSpinner->setEnabled( false );
+    }
+
+    ui->frequencySpinner->setValue( frequency );
+    ui->amplitudeSlider->setValue( amplitude * 100.0f );
+
+    setComboBox( note->getWavetype() );
+    blockSignals( false );
+}
+
+void MainWindow::buttonFivePressed() {
+    m_currentNote = 4;
+    Note * note = m_sequencerController->getSequencer()->getNotes().at( 4 );
+    Oscillator * oscillator = note->getOscillator();
+
+    float frequency = oscillator->getFrequency();
+    float amplitude = note->getAmplitude();
+
+    blockSignals( true );
+    if( note->getWavetype() == FM ) {
+        FmOscillator * fm = static_cast<FmOscillator *>( oscillator );
+        ui->harmonicitySpinner->setEnabled( true );
+        ui->modIndexSpinner->setEnabled( true );
+        ui->harmonicitySpinner->setValue( fm->getHarmonicity() );
+        ui->modIndexSpinner->setValue( fm->getModulationIndex() );
+    } else {
+        ui->harmonicitySpinner->setEnabled( false );
+        ui->modIndexSpinner->setEnabled( false );
+    }
+
+    ui->frequencySpinner->setValue( frequency );
+    ui->amplitudeSlider->setValue( amplitude * 100.0f );
+
+    setComboBox( note->getWavetype() );
+    blockSignals( false );
+}
+
+void MainWindow::buttonSixPressed() {
+    m_currentNote = 5;
+    Note * note = m_sequencerController->getSequencer()->getNotes().at( 5 );
+    Oscillator * oscillator = note->getOscillator();
+
+    float frequency = oscillator->getFrequency();
+    float amplitude = note->getAmplitude();
+
+    blockSignals( true );
+    if( note->getWavetype() == FM ) {
+        FmOscillator * fm = static_cast<FmOscillator *>( oscillator );
+        ui->harmonicitySpinner->setEnabled( true );
+        ui->modIndexSpinner->setEnabled( true );
+        ui->harmonicitySpinner->setValue( fm->getHarmonicity() );
+        ui->modIndexSpinner->setValue( fm->getModulationIndex() );
+    } else {
+        ui->harmonicitySpinner->setEnabled( false );
+        ui->modIndexSpinner->setEnabled( false );
+    }
+
+    ui->frequencySpinner->setValue( frequency );
+    ui->amplitudeSlider->setValue( amplitude * 100.0f );
+
+    setComboBox( note->getWavetype() );
+    blockSignals( false );
+}
+
+void MainWindow::setComboBox( Wavetype wavetype ) {
+    if( wavetype == SINE ) {
+        ui->waveformChooser->setCurrentIndex( ui->waveformChooser->findText( m_sine ) );
+    } else if( wavetype == TRIANGLE ) {
+        ui->waveformChooser->setCurrentIndex( ui->waveformChooser->findText( m_triangle ) );
+    } else if( wavetype == FM ) {
+        ui->waveformChooser->setCurrentIndex( ui->waveformChooser->findText( m_fm ) );
+    } else if( wavetype == RSAW ) {
+        ui->waveformChooser->setCurrentIndex( ui->waveformChooser->findText( m_rsaw ) );
+    } else {
+        ui->waveformChooser->setCurrentIndex( ui->waveformChooser->findText( m_sine ) );
+    }
+}
+
+void MainWindow::amplitudeSliderChanged(int value) {
+    m_sequencerController->setAmplitude( m_currentNote, (float) value / 100.0f );
+}
+
+void MainWindow::frequencySpinnerChanged(double value) {
+    m_sequencerController->setFrequency( m_currentNote, (float) value );
+}
+
+void MainWindow::harmonicitySpinnerChanged(double value) {
+    m_sequencerController->setHarmonicity( m_currentNote, (float) value );
+}
+
+void MainWindow::modulationIndexSpinnerChanged(double value) {
+    m_sequencerController->setModulationIndex( m_currentNote, (float) value );
+}
+
+void MainWindow::waveformChooserChanged(QString wave) {
+    // TODO implement
 }

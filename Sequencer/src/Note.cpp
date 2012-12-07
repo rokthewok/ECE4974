@@ -1,18 +1,15 @@
 #include "include/Note.h"
 
-Note::Note( Oscillator *oscillator )
-    : m_oscillator( oscillator ),
-      m_barLength( 4 ),
-      m_amplitude( 1.0f ) {
-    m_beats = new int[m_barLength]; // four "beat" length;
+Note::Note( Wavetype wavetype, Oscillator * oscillator )
+    : Note::Note( wavetype, oscillator, 16 ){
 }
 
-Note::Note( Oscillator *oscillator, int barLength )
+Note::Note( Wavetype wavetype, Oscillator * oscillator, int barLength )
     : m_oscillator( oscillator ),
       m_barLength( barLength ),
       m_beats( new int[barLength] ),
-      m_amplitude( 1.0f ) {
-
+      m_amplitude( 1.0f ),
+      m_wavetype( wavetype ) {
 }
 
 float Note::nextSample( int beat ) {
@@ -23,9 +20,10 @@ float Note::nextSample( int beat ) {
     return m_amplitude * m_beats[beat] * m_oscillator->nextSample();
 }
 
-Oscillator * Note::setOscillator( Oscillator * oscillator ) {
+Oscillator * Note::setOscillator( Wavetype wavetype, Oscillator * oscillator ) {
     Oscillator * temp = m_oscillator;
     m_oscillator = oscillator;
+    m_wavetype = wavetype;
 
     return temp;
 }
@@ -68,4 +66,24 @@ bool Note::isBeatSet( int beat ) {
     } else {
         return false;
     }
+}
+
+void Note::reset() {
+    m_oscillator->reset();
+}
+
+float Note::getAmplitude() const {
+    return m_amplitude;
+}
+
+void Note::setAmplitude( float amplitude ) {
+    m_amplitude = amplitude;
+}
+
+Oscillator * Note::getOscillator() {
+    return m_oscillator;
+}
+
+Wavetype Note::getWavetype() const {
+    return m_wavetype;
 }
