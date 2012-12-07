@@ -10,6 +10,7 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
     ui->setupUi(this);
     connect( ui->playButton, SIGNAL(clicked()), m_sequencerController, SLOT( play() ) );
     connect( ui->stopButton, SIGNAL( clicked() ), m_sequencerController, SLOT( stop() ) );
+    setFixedSize( 600, 400 );
 
     for( int i = 0; i < m_sequencerController->getSequencer()->getBarLength(); i++ ) {
         // add a radio button to each list
@@ -21,12 +22,12 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
         m_noteSixButtons.append( new QCheckBox() );
 
         // add to Gridlayout here
-        ui->gridLayout->addWidget( m_noteOneButtons.at( i ), 5, i, Qt::AlignHCenter | Qt::AlignVCenter );
-        ui->gridLayout->addWidget( m_noteTwoButtons.at( i ), 4, i, Qt::AlignHCenter | Qt::AlignVCenter );
-        ui->gridLayout->addWidget( m_noteThreeButtons.at( i ), 3, i, Qt::AlignHCenter | Qt::AlignVCenter );
-        ui->gridLayout->addWidget( m_noteFourButtons.at( i ), 2, i, Qt::AlignHCenter | Qt::AlignVCenter );
-        ui->gridLayout->addWidget( m_noteFiveButtons.at( i ), 1, i, Qt::AlignHCenter | Qt::AlignVCenter );
-        ui->gridLayout->addWidget( m_noteSixButtons.at( i ), 0, i, Qt::AlignHCenter | Qt::AlignVCenter );
+        ui->sequencerLayout->addWidget( m_noteOneButtons.at( i ), 5, i, Qt::AlignHCenter | Qt::AlignVCenter );
+        ui->sequencerLayout->addWidget( m_noteTwoButtons.at( i ), 4, i, Qt::AlignHCenter | Qt::AlignVCenter );
+        ui->sequencerLayout->addWidget( m_noteThreeButtons.at( i ), 3, i, Qt::AlignHCenter | Qt::AlignVCenter );
+        ui->sequencerLayout->addWidget( m_noteFourButtons.at( i ), 2, i, Qt::AlignHCenter | Qt::AlignVCenter );
+        ui->sequencerLayout->addWidget( m_noteFiveButtons.at( i ), 1, i, Qt::AlignHCenter | Qt::AlignVCenter );
+        ui->sequencerLayout->addWidget( m_noteSixButtons.at( i ), 0, i, Qt::AlignHCenter | Qt::AlignVCenter );
 
         // connect up radio buttons to appropriate slot
         connect( m_noteOneButtons.at( i ), SIGNAL( clicked() ), this, SLOT( setNoteOneBeats() ) );

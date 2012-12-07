@@ -61,3 +61,11 @@ void Note::clearAllBeats() {
         m_beats[i] = 0;
     }
 }
+
+bool Note::isBeatSet( int beat ) {
+    if( m_beats[beat] ) {
+        return true;
+    } else {
+        return false;
+    }
+}

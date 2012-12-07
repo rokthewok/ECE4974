@@ -80,11 +80,11 @@ jack_port_t * JackSequencerController::getPort() {
 }
 
 void JackSequencerController::addNoteOnBeat( int note, int beat ) {
-    m_sequencer->getNotes().at( note )->setBeat( beat );
+    m_sequencer->setNoteOnBeat( note, beat );
 }
 
 void JackSequencerController::removeNoteOnBeat( int note, int beat ) {
-    m_sequencer->getNotes().at( note )->clearBeat( beat );
+    m_sequencer->removeNoteOnBeat( note, beat );
 }
 
 Sequencer * JackSequencerController::getSequencer() {

@@ -21,6 +21,8 @@ public:
     void setSampleRate( int sampleRate );
     void setBpm(int bpm);
     void stop();
+    bool setNoteOnBeat( int note, int beat );
+    bool removeNoteOnBeat( int note, int beat );
 
 private:
     int m_bpm;
@@ -32,6 +34,7 @@ private:
     int m_samplesPerBeat;
     int m_currentRepeat;
     QList<Note *> m_notes;
+    QList<int> m_numberOfNotesPerBeat;
 
     int calculateSamplesPerBeat( int sampleRate, int bpm );
 };

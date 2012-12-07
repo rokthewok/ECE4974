@@ -13,6 +13,7 @@ public:
     bool setBeat( int beat );
     bool clearBeat( int beat );
     void clearAllBeats();
+    bool isBeatSet( int beat );
 private:
     Oscillator * m_oscillator;
     float m_amplitude;

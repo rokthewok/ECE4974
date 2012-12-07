@@ -25,6 +25,10 @@ void Sequencer::init() {
     m_notes.append( new Note( new SineOscillator( m_sampleRate, F_G4 ), 16 ) );
     m_notes.append( new Note( new SineOscillator( m_sampleRate, F_A4 ), 16 ) );
     m_notes.append( new Note( new SineOscillator( m_sampleRate, F_C5 ), 16 ) );
+
+    for( int i = 0; i < m_barLength; i++ ) {
+        m_numberOfNotesPerBeat.append( 0 );
+    }
 }
 
 float Sequencer::nextSample() {
@@ -34,6 +38,10 @@ float Sequencer::nextSample() {
     for( it = m_notes.begin(); it != m_notes.end(); it++ ) {
         sample += m_decay * (*it)->nextSample( m_beat ); // TODO keep track of number of notes on a beat, and scale
                                                          // the sample appropriately
+    }
+
+    if( m_numberOfNotesPerBeat.at( m_beat ) != 0 ) {
+        sample = sample / (float) m_numberOfNotesPerBeat.at( m_beat );
     }
 
     if( m_currentSample % m_samplesPerBeat == 0 ) {
@@ -97,4 +105,34 @@ void Sequencer::stop() {
 
 int Sequencer::calculateSamplesPerBeat( int sampleRate, int bpm ) {
     return (int) ( (float) sampleRate * 60.0f / (float) bpm );
+}
+
+bool Sequencer::setNoteOnBeat( int note, int beat ) {
+    if( note >= m_notes.length() && note < 0 &&
+            beat >= m_barLength && beat < 0 ) {
+        return false;
+    }
+
+    if( !m_notes.at( note )->isBeatSet( beat ) ) {
+        m_notes.at( note )->setBeat( beat );
+        m_numberOfNotesPerBeat.replace( beat, m_numberOfNotesPerBeat.at( beat ) + 1 );
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Sequencer::removeNoteOnBeat( int note, int beat ) {
+    if( note >= m_notes.length() && note < 0 &&
+            beat >= m_barLength && beat < 0 ) {
+        return false;
+    }
+
+    if( m_notes.at( note )->isBeatSet( beat ) ) {
+        m_notes.at( note )->clearBeat( beat );
+        m_numberOfNotesPerBeat.replace( beat, m_numberOfNotesPerBeat.at( beat ) - 1 );
+        return true;
+    } else {
+        return false;
+    }
 }
