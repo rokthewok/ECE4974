@@ -87,6 +87,10 @@ void JackSequencerController::removeNoteOnBeat( int note, int beat ) {
     m_sequencer->getNotes().at( note )->clearBeat( beat );
 }
 
+Sequencer * JackSequencerController::getSequencer() {
+    return m_sequencer;
+}
+
 void JackSequencerController::setSequencer( Sequencer * sequencer ) {
     m_sequencer = sequencer;
 }

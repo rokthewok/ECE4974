@@ -14,11 +14,6 @@ int main(int argc, char *argv[])
     Sequencer sequencer( jack_get_sample_rate( controller.getClient() ), 80 * 4 );
     sequencer.init();
 
-    QList<Note *> notes = sequencer.getNotes();
-    for( int i = 0; i < notes.length(); i++ ) {
-        notes.at( i )->setBeat( i * 2 );
-    }
-
     controller.setSequencer( &sequencer );
 
     QApplication a(argc, argv);

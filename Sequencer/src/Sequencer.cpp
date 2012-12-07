@@ -24,6 +24,7 @@ void Sequencer::init() {
     m_notes.append( new Note( new SineOscillator( m_sampleRate, F_E4 ), 16 ) );
     m_notes.append( new Note( new SineOscillator( m_sampleRate, F_G4 ), 16 ) );
     m_notes.append( new Note( new SineOscillator( m_sampleRate, F_A4 ), 16 ) );
+    m_notes.append( new Note( new SineOscillator( m_sampleRate, F_C5 ), 16 ) );
 }
 
 float Sequencer::nextSample() {
@@ -72,6 +73,10 @@ int Sequencer::getBpm() const {
 
 QList<Note *> & Sequencer::getNotes() {
     return m_notes;
+}
+
+int Sequencer::getBarLength() const {
+    return m_barLength;
 }
 
 void Sequencer::setSampleRate( int sampleRate ) {

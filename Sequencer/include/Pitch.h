@@ -91,23 +91,23 @@
 #define F_BFLAT4    F_ASHARP4
 #define F_B4        2 * F_B3
 
-//#define F_C5        2 * F_C0
-//#define F_CSHARP5
-//#define F_DFLAT5
-//#define F_D5
-//#define F_DSHARP5
-//#define F_EFLAT5
-//#define F_E5
-//#define F_F5
-//#define F_FSHARP5
-//#define F_GFLAT5
-//#define F_G5
-//#define F_GSHARP5
-//#define F_AFLAT5
-//#define F_A5
-//#define F_ASHARP5
-//#define F_BFLAT5
-//#define F_B5
+#define F_C5        2 * F_C4
+#define F_CSHARP5   2 * F_CSHARP4
+#define F_DFLAT5    F_CSHARP5
+#define F_D5        2 * F_D4
+#define F_DSHARP5   2 * F_DSHARP4
+#define F_EFLAT5    F_DSHARP5
+#define F_E5        2 * F_E4
+#define F_F5        2 * F_F4
+#define F_FSHARP5   2 * F_FSHARP4
+#define F_GFLAT5    F_FSHARP5
+#define F_G5        2 * F_G4
+#define F_GSHARP5   2 * F_GSHARP4
+#define F_AFLAT5    F_GSHARP5
+#define F_A5        2 * F_A4
+#define F_ASHARP5   2 * F_ASHARP4
+#define F_BFLAT5    F_ASHARP5
+#define F_B5        2 * F_B4
 
 //#define F_C6        2 * F_C0
 //#define F_CSHARP6

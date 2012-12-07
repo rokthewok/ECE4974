@@ -17,6 +17,7 @@ public:
     jack_client_t * getClient();
     jack_port_t * getPort();
     sample_t nextSample();
+    Sequencer * getSequencer();
     void setSequencer( Sequencer * sequencer );
 
 signals:

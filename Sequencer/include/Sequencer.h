@@ -17,9 +17,11 @@ public:
     int getCurrentBeat() const;
     int getBpm() const;
     QList<Note *> & getNotes();
+    int getBarLength() const;
     void setSampleRate( int sampleRate );
     void setBpm(int bpm);
     void stop();
+
 private:
     int m_bpm;
     int m_beat;
