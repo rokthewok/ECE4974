@@ -22,7 +22,11 @@ SOURCES += src/main.cpp\
     src/Note.cpp \
     src/Sequencer.cpp \
     src/JackSequencerController.cpp \
-    src/OscillatorFactory.cpp
+    src/OscillatorFactory.cpp \
+    src/SineBuilder.cpp \
+    src/FmBuilder.cpp \
+    src/RisingSawtoothBuilder.cpp \
+    src/TriangleBuilder.cpp
 
 HEADERS  += include/MainWindow.h \
     include/WavWriter.h \
@@ -37,6 +41,11 @@ HEADERS  += include/MainWindow.h \
     include/JackSequencerController.h \
     include/Pitch.h \
     include/Wavetype.h \
-    include/OscillatorFactory.h
+    include/OscillatorFactory.h \
+    include/OscillatorBuilder.h \
+    include/SineBuilder.h \
+    include/FmBuilder.h \
+    include/RisingSawtoothBuilder.h \
+    include/TriangleBuilder.h
 
 FORMS    += mainwindow.ui

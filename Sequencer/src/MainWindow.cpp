@@ -322,6 +322,6 @@ void MainWindow::modulationIndexSpinnerChanged(double value) {
     m_sequencerController->setModulationIndex( m_currentNote, (float) value );
 }
 
-void MainWindow::waveformChooserChanged(QString wave) {
+void MainWindow::waveformChooserChanged( QString wave ) {
     // TODO implement
 }
