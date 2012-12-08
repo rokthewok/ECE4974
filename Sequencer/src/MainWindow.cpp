@@ -6,6 +6,7 @@
 #include "include/Oscillator.h"
 #include "include/Note.h"
 #include "include/FmOscillator.h"
+#include "include/SaveOptionsDialog.h"
 
 MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *parent) :
     QMainWindow(parent),
@@ -410,5 +411,6 @@ void MainWindow::playError( QString message ) {
 /**************************************************************************************/
 
 void MainWindow::saveWav() {
-
+    SaveOptionsDialog dialog( this );
+    dialog.exec();
 }

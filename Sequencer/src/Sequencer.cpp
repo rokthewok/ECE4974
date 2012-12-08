@@ -50,6 +50,7 @@ float Sequencer::nextSample() {
         m_beat++;
         if( m_beat >= m_barLength ) {
             m_beat = 0;
+            m_currentRepeat++;
         }
     } else if( m_currentSample < m_samplesPerBeat / 20
                && m_decay < 1.0f ) {
@@ -102,6 +103,7 @@ void Sequencer::stop() {
     m_currentSample = 0;
     m_beat = 0;
     m_decay = 0.0f;
+    m_currentRepeat = 0;
 }
 
 int Sequencer::calculateSamplesPerBeat( int sampleRate, int bpm ) {
