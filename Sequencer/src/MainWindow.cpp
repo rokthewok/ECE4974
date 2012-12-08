@@ -1,4 +1,5 @@
 #include <QComboBox>
+#include <QMessageBox>
 #include "include/MainWindow.h"
 #include "ui_mainwindow.h"
 #include "include/JackSequencerController.h"
@@ -72,6 +73,8 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
 
 MainWindow::~MainWindow()
 {
+    m_sequencerController->stop();
+    delete m_sequencerController;
     delete ui;
 }
 
@@ -375,5 +378,21 @@ void MainWindow::parametersChanged() {
     default:
         break;
     }
+}
+/**************************************************************************************/
+
+/**************************************************************************************/
+// Somewhat informative error dialog boxes
+/**************************************************************************************/
+void MainWindow::initError( QString message ) {
+    QMessageBox msgBox( this );
+    msgBox.setText( message );
+    msgBox.exec();
+}
+
+void MainWindow::playError( QString message ) {
+    QMessageBox msgBox( this );
+    msgBox.setText( message );
+    msgBox.exec();
 }
 /**************************************************************************************/
