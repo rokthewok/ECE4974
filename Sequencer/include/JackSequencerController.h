@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QString>
 #include "include/Sequencer.h"
+#include "include/OscillatorFactory.h"
 
 class JackSequencerController : public QObject {
     Q_OBJECT
@@ -24,6 +25,7 @@ public:
 signals:
     void jackInitError( QString message );
     void jackPlayError( QString message );
+    void parametersChanged();
 
 public slots:
     void addNoteOnBeat( int note, int beat );
@@ -42,6 +44,7 @@ private:
     jack_port_t * m_outgoingPort;
     const char * m_destinationPort;
     Sequencer * m_sequencer;
+    OscillatorFactory m_factory;
 };
 
 #endif // JACKSEQUENCERCONTROLLER_H

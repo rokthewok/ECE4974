@@ -108,7 +108,11 @@ void JackSequencerController::setAmplitude(int note, float value) {
 }
 
 void JackSequencerController::setOscillator(int note, Wavetype wavetype) {
+    int sampleRate = jack_get_sample_rate( m_client );
+    float frequency = m_sequencer->getNotes().at( note )->getOscillator()->getFrequency();
+    m_sequencer->setOscillator( note, m_factory.buildOscillator( wavetype, sampleRate, frequency ), wavetype );
 
+    parametersChanged();
 }
 
 void JackSequencerController::setFrequency(int note, float frequency) {

@@ -137,3 +137,8 @@ bool Sequencer::removeNoteOnBeat( int note, int beat ) {
         return false;
     }
 }
+
+void Sequencer::setOscillator( int note, Oscillator * oscillator, Wavetype wavetype ) {
+    Oscillator * temp = m_notes.at( note )->setOscillator( wavetype, oscillator );
+    delete temp;
+}

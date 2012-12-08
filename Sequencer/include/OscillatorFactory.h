@@ -9,7 +9,8 @@
 class OscillatorFactory {
 public:
     OscillatorFactory();
-    Oscillator * buildOscillator( Wavetype wavetype );
+    ~OscillatorFactory();
+    Oscillator * buildOscillator( Wavetype wavetype, int sampleRate, float frequency );
 private:
     QHash<Wavetype, OscillatorBuilder *> m_builders;
 };

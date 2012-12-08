@@ -23,6 +23,7 @@ public:
     void stop();
     bool setNoteOnBeat( int note, int beat );
     bool removeNoteOnBeat( int note, int beat );
+    void setOscillator( int note, Oscillator * oscillator, Wavetype wavetype );
 
 private:
     int m_bpm;

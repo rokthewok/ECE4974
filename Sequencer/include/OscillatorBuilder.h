@@ -5,6 +5,7 @@
 
 class OscillatorBuilder {
 public:
+    virtual ~OscillatorBuilder();
     virtual Oscillator * buildOscillator( int sampleRate, float frequency ) = 0;
 };
 

@@ -41,6 +41,8 @@ public slots:
     void waveformChooserChanged( QString wave );
     void modulationIndexSpinnerChanged( double value );
 
+    void parametersChanged();
+
 private:
     void setComboBox( Wavetype wavetype );
 

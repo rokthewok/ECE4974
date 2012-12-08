@@ -12,6 +12,14 @@ OscillatorFactory::OscillatorFactory() {
     m_builders.insert( TRIANGLE, new TriangleBuilder() );
 }
 
-Oscillator * OscillatorFactory::buildOscillator( Wavetype wavetype ) {
-    return m_builders.value( wavetype );
+OscillatorFactory::~OscillatorFactory() {
+    QHash<Wavetype, OscillatorBuilder *>::iterator it;
+
+    for( it = m_builders.begin(); it != m_builders.end(); it++ ) {
+        delete it.value();
+    }
+}
+
+Oscillator * OscillatorFactory::buildOscillator( Wavetype wavetype, int sampleRate, float frequency ) {
+    return m_builders.value( wavetype )->buildOscillator( sampleRate, frequency );
 }

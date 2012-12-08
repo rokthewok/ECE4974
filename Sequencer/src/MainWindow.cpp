@@ -37,6 +37,7 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
     connect( ui->modIndexSpinner, SIGNAL( valueChanged(double) ), this, SLOT( modulationIndexSpinnerChanged(double) ) );
     connect( ui->harmonicitySpinner, SIGNAL( valueChanged(double) ), this, SLOT( harmonicitySpinnerChanged(double) ) );
     connect( ui->waveformChooser, SIGNAL( currentIndexChanged(QString) ), this, SLOT( waveformChooserChanged(QString) ) );
+    connect( m_sequencerController, SIGNAL( parametersChanged() ), this, SLOT( parametersChanged() ) );
 
     for( int i = 0; i < m_sequencerController->getSequencer()->getBarLength(); i++ ) {
         // add a radio button to each list
@@ -323,5 +324,37 @@ void MainWindow::modulationIndexSpinnerChanged(double value) {
 }
 
 void MainWindow::waveformChooserChanged( QString wave ) {
-    // TODO implement
+    if( wave == m_sine ) {
+        m_sequencerController->setOscillator( m_currentNote, SINE );
+    } else if( wave == m_fm ) {
+        m_sequencerController->setOscillator( m_currentNote, FM );
+    } else if( wave == m_rsaw ) {
+        m_sequencerController->setOscillator( m_currentNote, RSAW );
+    } else if( wave == m_triangle ) {
+        m_sequencerController->setOscillator( m_currentNote, TRIANGLE );
+    } else;
+}
+
+void MainWindow::parametersChanged() {
+    switch( m_currentNote ) {
+    case 0:
+        buttonOnePressed();
+        break;
+    case 1:
+        buttonTwoPressed();
+        break;
+    case 2:
+        buttonThreePressed();
+        break;
+    case 3:
+        buttonFourPressed();
+        break;
+    case 4:
+        buttonFivePressed();
+        break;
+    case 5:
+        buttonSixPressed();
+    default:
+        break;
+    }
 }

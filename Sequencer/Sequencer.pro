@@ -26,7 +26,8 @@ SOURCES += src/main.cpp\
     src/SineBuilder.cpp \
     src/FmBuilder.cpp \
     src/RisingSawtoothBuilder.cpp \
-    src/TriangleBuilder.cpp
+    src/TriangleBuilder.cpp \
+    src/OscilatorBuilder.cpp
 
 HEADERS  += include/MainWindow.h \
     include/WavWriter.h \
