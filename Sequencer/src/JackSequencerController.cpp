@@ -48,7 +48,9 @@ void JackSequencerController::play() {
             }
         }
 
-        free( ports );
+        if( ports != 0 ) {
+            free( ports );
+        }
     }
 }
 
@@ -131,4 +133,12 @@ void JackSequencerController::setModulationIndex(int note, float value) {
         FmOscillator * fm = static_cast<FmOscillator *>( m_sequencer->getNotes().at( note )->getOscillator() );
         fm->setModulationIndex( value );
     }
+}
+
+int JackSequencerController::getBpm() const {
+    return m_sequencer->getBpm() / 4;
+}
+
+void JackSequencerController::setBpm( int bpm ) {
+    m_sequencer->setBpm( bpm * 4 ); // four beat bar
 }

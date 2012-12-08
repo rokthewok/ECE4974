@@ -46,6 +46,8 @@ public slots:
     void initError( QString message );
     void playError( QString message );
 
+    void saveWav();
+
 private:
     void setComboBox( Wavetype wavetype );
 

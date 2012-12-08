@@ -27,7 +27,8 @@ SOURCES += src/main.cpp\
     src/FmBuilder.cpp \
     src/RisingSawtoothBuilder.cpp \
     src/TriangleBuilder.cpp \
-    src/OscilatorBuilder.cpp
+    src/OscilatorBuilder.cpp \
+    src/SaveOptionsDialog.cpp
 
 HEADERS  += include/MainWindow.h \
     include/WavWriter.h \
@@ -47,6 +48,7 @@ HEADERS  += include/MainWindow.h \
     include/SineBuilder.h \
     include/FmBuilder.h \
     include/RisingSawtoothBuilder.h \
-    include/TriangleBuilder.h
+    include/TriangleBuilder.h \
+    include/SaveOptionsDialog.h
 
 FORMS    += mainwindow.ui

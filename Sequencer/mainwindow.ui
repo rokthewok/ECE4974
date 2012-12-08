@@ -143,6 +143,23 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QLabel" name="bpmLabel">
+              <property name="text">
+               <string>bpm</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="bpmBox">
+              <property name="minimum">
+               <number>50</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>

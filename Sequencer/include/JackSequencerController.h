@@ -21,6 +21,7 @@ public:
     sample_t nextSample();
     Sequencer * getSequencer();
     void setSequencer( Sequencer * sequencer );
+    int getBpm() const;
 
 signals:
     void jackInitError( QString message );
@@ -38,6 +39,7 @@ public slots:
     void setHarmonicity( int note, float value );
     void setModulationIndex( int note, float value );
     void setFrequency( int note, float frequency );
+    void setBpm( int bpm );
 
 private:
     jack_client_t * m_client;

@@ -42,6 +42,9 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
     connect( ui->harmonicitySpinner, SIGNAL( valueChanged(double) ), this, SLOT( harmonicitySpinnerChanged(double) ) );
     connect( ui->waveformChooser, SIGNAL( currentIndexChanged(QString) ), this, SLOT( waveformChooserChanged(QString) ) );
     connect( m_sequencerController, SIGNAL( parametersChanged() ), this, SLOT( parametersChanged() ) );
+    connect( ui->bpmBox, SIGNAL( valueChanged(int) ), m_sequencerController, SLOT( setBpm(int) ) );
+
+    ui->bpmBox->setValue( m_sequencerController->getBpm() );
 
     // Set up the sequencer grid
     for( int i = 0; i < m_sequencerController->getSequencer()->getBarLength(); i++ ) {
@@ -68,12 +71,15 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
         connect( m_noteFourButtons.at( i ), SIGNAL( clicked() ), this, SLOT( setNoteFourBeats() ) );
         connect( m_noteFiveButtons.at( i ), SIGNAL( clicked() ), this, SLOT( setNoteFiveBeats() ) );
         connect( m_noteSixButtons.at( i ), SIGNAL( clicked() ), this, SLOT( setNoteSixBeats() ) );
+
+        // connect up the save menu option
+        connect( ui->actionSave, SIGNAL( triggered() ), this, SLOT( saveWav() ) );
     }
 }
 
 MainWindow::~MainWindow()
 {
-    m_sequencerController->stop();
+    //m_sequencerController->stop();
     delete m_sequencerController;
     delete ui;
 }
@@ -169,6 +175,7 @@ void MainWindow::buttonOnePressed() {
 
     ui->frequencySpinner->setValue( frequency );
     ui->amplitudeSlider->setValue( amplitude * 100.0f );
+    ui->bpmBox->setValue( m_sequencerController->getBpm() );
 
     setComboBox( note->getWavetype() );
     blockSignals( false );
@@ -196,6 +203,7 @@ void MainWindow::buttonTwoPressed() {
 
     ui->frequencySpinner->setValue( frequency );
     ui->amplitudeSlider->setValue( amplitude * 100.0f );
+    ui->bpmBox->setValue( m_sequencerController->getBpm() );
 
     setComboBox( note->getWavetype() );
     blockSignals( false );
@@ -223,6 +231,7 @@ void MainWindow::buttonThreePressed() {
 
     ui->frequencySpinner->setValue( frequency );
     ui->amplitudeSlider->setValue( amplitude * 100.0f );
+    ui->bpmBox->setValue( m_sequencerController->getBpm() );
 
     setComboBox( note->getWavetype() );
     blockSignals( false );
@@ -250,6 +259,7 @@ void MainWindow::buttonFourPressed() {
 
     ui->frequencySpinner->setValue( frequency );
     ui->amplitudeSlider->setValue( amplitude * 100.0f );
+    ui->bpmBox->setValue( m_sequencerController->getBpm() );
 
     setComboBox( note->getWavetype() );
     blockSignals( false );
@@ -277,6 +287,7 @@ void MainWindow::buttonFivePressed() {
 
     ui->frequencySpinner->setValue( frequency );
     ui->amplitudeSlider->setValue( amplitude * 100.0f );
+    ui->bpmBox->setValue( m_sequencerController->getBpm() );
 
     setComboBox( note->getWavetype() );
     blockSignals( false );
@@ -304,6 +315,7 @@ void MainWindow::buttonSixPressed() {
 
     ui->frequencySpinner->setValue( frequency );
     ui->amplitudeSlider->setValue( amplitude * 100.0f );
+    ui->bpmBox->setValue( m_sequencerController->getBpm() );
 
     setComboBox( note->getWavetype() );
     blockSignals( false );
@@ -396,3 +408,7 @@ void MainWindow::playError( QString message ) {
     msgBox.exec();
 }
 /**************************************************************************************/
+
+void MainWindow::saveWav() {
+
+}
