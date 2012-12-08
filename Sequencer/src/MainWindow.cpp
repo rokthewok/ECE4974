@@ -19,12 +19,14 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
     ui->tabWidget->setTabText( 0, QString( "Sequencer" ) );
     ui->tabWidget->setTabText( 1, QString( "Note Editor" ) );
 
+    // set up the combo box for waveform swapping
     QComboBox * comboBox = ui->waveformChooser;
     comboBox->addItem( m_sine );
     comboBox->addItem( m_triangle );
     comboBox->addItem( m_rsaw );
     comboBox->addItem( m_fm );
 
+    // connect up the button pressed slots to the buttons
     connect( ui->noteOneButton, SIGNAL( clicked() ), this, SLOT( buttonOnePressed() ) );
     connect( ui->noteTwoButton, SIGNAL( clicked() ), this, SLOT( buttonTwoPressed() ) );
     connect( ui->noteThreeButton, SIGNAL( clicked() ), this, SLOT( buttonThreePressed() ) );
@@ -32,6 +34,7 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
     connect( ui->noteFiveButton, SIGNAL( clicked() ), this, SLOT( buttonFivePressed() ) );
     connect( ui->noteSixButton, SIGNAL( clicked() ), this, SLOT( buttonSixPressed() ) );
 
+    // connect up the waveform parameter changing slots to the corresponding widgets
     connect( ui->amplitudeSlider, SIGNAL( sliderMoved(int) ), this, SLOT( amplitudeSliderChanged(int) ) );
     connect( ui->frequencySpinner, SIGNAL( valueChanged(double) ), this, SLOT( frequencySpinnerChanged(double) ) );
     connect( ui->modIndexSpinner, SIGNAL( valueChanged(double) ), this, SLOT( modulationIndexSpinnerChanged(double) ) );
@@ -39,6 +42,7 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
     connect( ui->waveformChooser, SIGNAL( currentIndexChanged(QString) ), this, SLOT( waveformChooserChanged(QString) ) );
     connect( m_sequencerController, SIGNAL( parametersChanged() ), this, SLOT( parametersChanged() ) );
 
+    // Set up the sequencer grid
     for( int i = 0; i < m_sequencerController->getSequencer()->getBarLength(); i++ ) {
         // add a radio button to each list
         m_noteOneButtons.append( new QCheckBox() );
@@ -71,6 +75,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/**************************************************************************************/
+// Sequencer grid slots. Ideally this could be done in a single function. Not
+// sure how to resolve this yet
+/**************************************************************************************/
 void MainWindow::setNoteOneBeats() {
     for( int i = 0; i < m_noteOneButtons.length(); i++ ) {
         if( m_noteOneButtons.at( i )->isChecked() ) {
@@ -130,7 +138,12 @@ void MainWindow::setNoteSixBeats() {
         }
     }
 }
+/**************************************************************************************/
 
+/**************************************************************************************/
+// Button pressed slots - ideally, this would all be compressed into one function,
+// but I haven't resolved how to do that cleverly
+/**************************************************************************************/
 void MainWindow::buttonOnePressed() {
     m_currentNote = 0;
     Note * note = m_sequencerController->getSequencer()->getNotes().at( 0 );
@@ -292,6 +305,8 @@ void MainWindow::buttonSixPressed() {
     setComboBox( note->getWavetype() );
     blockSignals( false );
 }
+/**************************************************************************************/
+
 
 void MainWindow::setComboBox( Wavetype wavetype ) {
     if( wavetype == SINE ) {
@@ -307,6 +322,9 @@ void MainWindow::setComboBox( Wavetype wavetype ) {
     }
 }
 
+/**************************************************************************************/
+// Slots for waveform parameter changes
+/**************************************************************************************/
 void MainWindow::amplitudeSliderChanged(int value) {
     m_sequencerController->setAmplitude( m_currentNote, (float) value / 100.0f );
 }
@@ -358,3 +376,4 @@ void MainWindow::parametersChanged() {
         break;
     }
 }
+/**************************************************************************************/
