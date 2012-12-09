@@ -5,6 +5,7 @@
 #include <QList>
 #include <QCheckBox>
 #include "Wavetype.h"
+#include "WavDataBuilder.h"
 
 class JackSequencerController;
 
@@ -47,6 +48,9 @@ public slots:
     void playError( QString message );
 
     void saveWav();
+    void saveSuccess();
+    void saveFailure();
+    void chooseFilename();
 
 private:
     void setComboBox( Wavetype wavetype );
@@ -60,6 +64,7 @@ private:
     QList<QCheckBox *> m_noteFiveButtons;
     QList<QCheckBox *> m_noteSixButtons;
     int m_currentNote;
+    WavDataBuilder m_builder;
 
     const QString m_sine = "Sine";
     const QString m_fm = "FM";

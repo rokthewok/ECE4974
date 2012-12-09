@@ -8,7 +8,6 @@ JackSequencerController::JackSequencerController()
 }
 
 JackSequencerController::~JackSequencerController() {
-    jack_disconnect( m_client, jack_port_name( m_outgoingPort ), m_destinationPort );
     jack_deactivate( m_client );
     jack_client_close( m_client );
 }

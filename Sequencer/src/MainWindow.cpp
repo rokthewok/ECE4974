@@ -1,12 +1,13 @@
 #include <QComboBox>
 #include <QMessageBox>
+#include <QFileDialog>
 #include "include/MainWindow.h"
 #include "ui_mainwindow.h"
 #include "include/JackSequencerController.h"
 #include "include/Oscillator.h"
 #include "include/Note.h"
 #include "include/FmOscillator.h"
-#include "include/SaveOptionsDialog.h"
+#include "include/WavDataBuilder.h"
 
 MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *parent) :
     QMainWindow(parent),
@@ -20,6 +21,7 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
 
     ui->tabWidget->setTabText( 0, QString( "Sequencer" ) );
     ui->tabWidget->setTabText( 1, QString( "Note Editor" ) );
+    ui->tabWidget->setTabText( 2, tr( "Save to WAV" ) );
 
     // set up the combo box for waveform swapping
     QComboBox * comboBox = ui->waveformChooser;
@@ -47,6 +49,12 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
 
     ui->bpmBox->setValue( m_sequencerController->getBpm() );
 
+    // connect up saving features
+    connect( ui->chooseButton, SIGNAL( clicked() ), this, SLOT( chooseFilename() ) );
+    connect( ui->saveButton, SIGNAL( clicked() ), this, SLOT( saveWav() ) );
+    connect( &m_builder, SIGNAL( writeSucceeded() ), this, SLOT( saveSuccess() ) );
+    connect( &m_builder, SIGNAL( writeFailed() ), this, SLOT( saveFailure() ) );
+
     // Set up the sequencer grid
     for( int i = 0; i < m_sequencerController->getSequencer()->getBarLength(); i++ ) {
         // add a radio button to each list
@@ -72,16 +80,11 @@ MainWindow::MainWindow(JackSequencerController *sequencerController, QWidget *pa
         connect( m_noteFourButtons.at( i ), SIGNAL( clicked() ), this, SLOT( setNoteFourBeats() ) );
         connect( m_noteFiveButtons.at( i ), SIGNAL( clicked() ), this, SLOT( setNoteFiveBeats() ) );
         connect( m_noteSixButtons.at( i ), SIGNAL( clicked() ), this, SLOT( setNoteSixBeats() ) );
-
-        // connect up the save menu option
-        connect( ui->actionSave, SIGNAL( triggered() ), this, SLOT( saveWav() ) );
     }
 }
 
 MainWindow::~MainWindow()
 {
-    //m_sequencerController->stop();
-    delete m_sequencerController;
     delete ui;
 }
 
@@ -411,6 +414,27 @@ void MainWindow::playError( QString message ) {
 /**************************************************************************************/
 
 void MainWindow::saveWav() {
-    SaveOptionsDialog dialog( this );
-    dialog.exec();
+    QString filename = ui->filenameLine->text();
+    if( !( filename.mid( filename.length() - 4 ) == QString( ".wav" ) ) ) {
+        filename.append( ".wav" );
+    }
+    m_builder.buildAndSaveWav( *( m_sequencerController->getSequencer() ),
+                               ui->repeatSpinBox->value(), filename );
+    ui->filenameLine->clear();
+}
+
+void MainWindow::saveSuccess() {
+    QMessageBox message( this );
+    message.setText( tr( "successfully saved." ) );
+    message.exec();
+}
+
+void MainWindow::saveFailure() {
+    QMessageBox message( this );
+    message.setText( tr( "save failed." ) );
+    message.exec();
+}
+
+void MainWindow::chooseFilename() {
+    ui->filenameLine->setText( QFileDialog::getSaveFileName( this ) );
 }
