@@ -3,6 +3,7 @@
 #include "include/SineOscillator.h"
 #include "include/Pitch.h"
 #include "include/Wavetype.h"
+#include <iostream>
 
 Sequencer::Sequencer( int sampleRate )
     : Sequencer::Sequencer( sampleRate, 400 ) {
@@ -15,7 +16,8 @@ Sequencer::Sequencer( int sampleRate, int bpm )
       m_barLength( 16 ),
       m_decay( 0.1f ),
       m_sampleRate( sampleRate ),
-      m_currentRepeat( 0 ) {
+      m_currentRepeat( 0 ),
+      m_currentSample( 1 ) {  // starting at 1 the first time accounts for the initial first beat read (the modulo in play messes up)
     m_samplesPerBeat = calculateSamplesPerBeat( m_sampleRate, m_bpm );
 }
 
@@ -35,6 +37,7 @@ void Sequencer::init() {
 float Sequencer::nextSample() {
     float sample = 0.0f;
 
+    //std::cout << m_beat << std::endl;
     QList<Note *>::iterator it;
     for( it = m_notes.begin(); it != m_notes.end(); it++ ) {
         sample += m_decay * (*it)->nextSample( m_beat ); // TODO keep track of number of notes on a beat, and scale
@@ -100,10 +103,14 @@ void Sequencer::setBpm( int bpm ) {
 }
 
 void Sequencer::stop() {
-    m_currentSample = 0;
+    m_currentSample = 1;    // starting at 1 the first time accounts for the initial first beat read (the modulo in play messes up)
     m_beat = 0;
     m_decay = 0.0f;
     m_currentRepeat = 0;
+
+    for( int i = 0; i < m_notes.length(); i++ ) {
+        m_notes.at( i )->getOscillator()->reset();
+    }
 }
 
 int Sequencer::calculateSamplesPerBeat( int sampleRate, int bpm ) {

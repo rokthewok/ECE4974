@@ -1,0 +1,30 @@
+Required to build:
+	Qt4 libraries
+	JACK audio libraries
+
+To build:
+	type 'make clean'
+	type 'qmake'
+	type 'make'
+
+To run:
+	Execute 'Sequencer' (type './Sequencer'). This should also automatically
+	start up the JACK server, but if not, you will have to do this manually.
+	Open up an additional terminal window and type 'jackd -d alsa' for the
+	simplest startup options.
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+		Super Savvy Sequencer
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+Super Savvy Sequencer provides a simple way to make interesting one-bar melodies
+and loops. Functionality includes:
+	- up to 6 distinct pitches
+	- variable tempo
+	- ability to manipulate amplitude, waveform, and pitch of each line
+	- WAV file saving with options for number of repeats
+
+Known issues:
+	- If you wish to open up a saved waveform in, say, Audacity,
+		the sequencer app must be closed first. For some reason,
+		Audacity (or JACK or ALSA) doesn't like sharing or
+		being shared.
