@@ -7,3 +7,23 @@ Sequencer
 Controllers change sequencer parameters
 Uses JACK audio to output sound
 	on each buffer get, the sequencer adds up notes and their amplitudes according to time intervals
+
+
+----------------------------------------------
+01/05/2013	Next Steps		     |
+----------------------------------------------
+Features to add:
+	- Effects chain
+	- Multiple sequencer support
+	- Dynamic sequencer bar length and height
+	- Detuning knobs replace customizable frequency
+	- Variable note lengths
+	- GL graph-like note interface
+	- Spectrum analyzer
+	- Attack and decay options
+
+Effects:
+	- delay
+	- reverb
+	- distortion
+	- chorus
