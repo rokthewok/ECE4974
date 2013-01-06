@@ -12,18 +12,20 @@ Uses JACK audio to output sound
 ----------------------------------------------
 01/05/2013	Next Steps		     |
 ----------------------------------------------
-Features to add:
-	- Effects chain
-	- Multiple sequencer support
-	- Dynamic sequencer bar length and height
-	- Detuning knobs replace customizable frequency
-	- Variable note lengths
-	- GL graph-like note interface
-	- Spectrum analyzer
-	- Attack and decay options
+Features to add							Estimated Time
+	- Effects chain							10
+	- Multiple sequencer support					15
+	- Dynamic sequencer bar length and height			20
+	- Detuning knobs replace customizable frequency			 5
+	- Variable note lengths						20
+	- GL graph-like note interface					20
+	- Spectrum analyzer						15
+	- Attack and decay options					15
 
 Effects:
-	- delay
-	- reverb
-	- distortion
-	- chorus
+	- delay								10
+	- reverb							15
+	- distortion							20
+	- chorus							15
+								----------
+							Total:	       180
